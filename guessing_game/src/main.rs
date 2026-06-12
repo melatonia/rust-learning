@@ -6,10 +6,11 @@ use rand::prelude::*;
 fn main() {
     println!("Guess the number!");
 
+    let mut number_of_guesses = 8;
     let secret_number = rand::rng().random_range(1..=100);
 
     loop {
-        println!("Please input your guess.");
+        println!("Please input your guess. (You have {number_of_guesses} number of guesses left.)");
 
         let mut guess = String::new();
 
@@ -34,6 +35,13 @@ fn main() {
                 println!("You win!");
                 break;
             }
+        }
+
+        number_of_guesses -= 1;
+
+        if number_of_guesses <= 0 {
+            println!("No guesses left! The number was: {secret_number}");
+            break;
         }
     }
 }
